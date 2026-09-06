@@ -76,7 +76,15 @@ resources:
       config:
         xsappname: ExpenseManager-uaa-${space}
         tenant-mode: dedicated
-  
+
+  - name: ExpenseManager-uaa-key
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      config:
+        xsappname: ExpenseManager-uaa-${space}
+
   - name: ExpenseManager-destination
     type: org.cloudfoundry.managed-service
     requires:
@@ -102,4 +110,17 @@ resources:
                 Authentication: NoAuthentication
                 Type: HTTP
                 ProxyType: Internet
+          subaccount:
+            existing_destinations_policy: update
+            destinations:
+              - Name: ExpenseManager-auth
+                URL: ~{srv-api/srv-url}
+                Authentication: OAuth2UserTokenExchange
+                Type: HTTP
+                ProxyType: Internet
+                HTML5Runtime_enabled: true
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true
+                TokenServiceInstanceName: ExpenseManager-uaa
+                TokenServiceKeyName: ExpenseManager-uaa-key
     
