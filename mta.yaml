@@ -105,7 +105,7 @@ resources:
           subaccount:
             existing_destinations_policy: update
             destinations:
-              - Name: ExpenseManager-auth
+              - Name: ExpenseManager-destination
                 URL: ~{srv-api/srv-url}
                 Authentication: OAuth2UserTokenExchange
                 Type: HTTP
