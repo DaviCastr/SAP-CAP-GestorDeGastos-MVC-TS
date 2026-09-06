@@ -77,14 +77,6 @@ resources:
         xsappname: ExpenseManager-uaa-${space}
         tenant-mode: dedicated
 
-  - name: ExpenseManager-uaa-key
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      config:
-        xsappname: ExpenseManager-uaa-${space}
-
   - name: ExpenseManager-destination
     type: org.cloudfoundry.managed-service
     requires:
